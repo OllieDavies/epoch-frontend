@@ -1,3 +1,8 @@
 .App {
   text-align: left;
+  display: flex;
+}
+
+.Column {
+  flex: 1;
 }

@@ -1,10 +1,11 @@
 import React from "react";
-import { render } from "@testing-library/react";
-import TimeDisplay from "./";
+import TimeDisplay from "./index";
 
 describe("<TimeDisplay />", () => {
-  test("displays loading when first loaded", () => {
-    const { getByTestId } = render(<TimeDisplay />);
-    expect(() => getByTestId("timedisplay loading")).not.toThrow();
+  test("matches snapshot", () => {
+    expect(<TimeDisplay />).toMatchSnapshot();
   });
+  test.todo("displays the loading component");
+  test.todo("displays the epoch seconds api response");
+  test.todo("displays http status error if response is not ok");
 });

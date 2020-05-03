@@ -10,18 +10,19 @@ const TimeDifferenceDisplay: React.FC<ITimeDifferenceDisplayProps> = ({
 }) => {
   const [seconds, setSeconds] = useState(0);
 
-  const updateSeconds = () => {
-    setSeconds(Math.floor(new Date().getTime() - startEpoch * 1000));
-  };
-
   useEffect(() => {
+    function updateSeconds() {
+      const seconds = Math.floor(new Date().getTime() - startEpoch * 1000);
+      setSeconds(seconds);
+    }
+
     const timer = setInterval(updateSeconds, 1000);
     return () => {
       clearInterval(timer);
     };
   });
 
-  return <p>{new Date(seconds).toISOString().substr(11, 8)}</p>;
+  return <>{new Date(seconds).toISOString().substr(11, 8)}</>;
 };
 
 export default TimeDifferenceDisplay;

@@ -1,0 +1,7 @@
+// Jest Snapshot v1, https://goo.gl/fbAQLP
+
+exports[`TimeDifferenceDisplay matches snapshot 1`] = `
+<TimeDifferenceDisplay
+  startEpoch={1000000}
+/>
+`;

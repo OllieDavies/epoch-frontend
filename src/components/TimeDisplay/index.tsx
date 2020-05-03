@@ -19,10 +19,13 @@ const TimeDisplay: React.FC = () => {
   return (
     <>
       <h1>Current Time {isLoading && <Loading />}</h1>
-      <p>Last Response:</p>
-      <code>{response?.data.epoch}</code>
-      <p>Time since last response:</p>
-      <TimeDifferenceDisplay startEpoch={response?.data.epoch} />
+      <p>
+        Last Response: <code>{response?.data.epoch}</code>
+      </p>
+      <p>
+        Time since last response:{" "}
+        <TimeDifferenceDisplay startEpoch={response?.data.epoch} />
+      </p>
     </>
   );
 };

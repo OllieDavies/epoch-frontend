@@ -9,9 +9,9 @@ const MetricsDispaly: React.FC = () => {
   // Fetch on mount and start a timer to poll
   useEffect(() => {
     fetch();
-    const timer = setInterval(fetch, 3000);
+    const timer = setInterval(fetch, 30000);
     return () => clearInterval(timer);
-  }, []);
+  }, [fetch]);
 
   if (error) return <p>{error.response?.statusText}</p>;
 

@@ -2,6 +2,7 @@ import * as React from "react";
 import { useEffect } from "react";
 import useApi from "../useApi";
 import Loading from "../Loading";
+import TimeDifferenceDisplay from "../TimeDifferenceDisplay";
 
 const TimeDisplay: React.FC = () => {
   const { isLoading, response, error, fetch } = useApi("/api/v1/time");
@@ -9,16 +10,19 @@ const TimeDisplay: React.FC = () => {
   // Fetch on mount and start a timer to poll
   useEffect(() => {
     fetch();
-    const timer = setInterval(fetch, 3000);
+    const timer = setInterval(fetch, 30000);
     return () => clearInterval(timer);
-  }, []);
+  }, [fetch]);
 
   if (error) return <p>{error.response?.statusText}</p>;
 
   return (
     <>
       <h1>Current Time {isLoading && <Loading />}</h1>
-      <p>{response?.data.epoch}</p>
+      <p>Last Response:</p>
+      <code>{response?.data.epoch}</code>
+      <p>Time since last response:</p>
+      <TimeDifferenceDisplay startEpoch={response?.data.epoch} />
     </>
   );
 };

@@ -1,4 +1,4 @@
-import { useState } from "react";
+import { useState, useCallback } from "react";
 import axios, { AxiosResponse, AxiosError } from "axios";
 
 const api = axios.create({
@@ -15,14 +15,14 @@ export default function useApi(path: string) {
   );
   const [error, setError] = useState<AxiosError | undefined>(undefined);
 
-  const fetch = () => {
+  const fetch = useCallback(() => {
     setLoading(true);
     api
       .get(path)
       .then(setResponse)
       .catch(setError)
       .finally(() => setLoading(false));
-  };
+  }, [path]);
 
   return {
     isLoading,

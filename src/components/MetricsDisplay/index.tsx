@@ -13,14 +13,16 @@ const MetricsDispaly: React.FC = () => {
     return () => clearInterval(timer);
   }, [fetch]);
 
-  if (error) return <p>{error.response?.statusText}</p>;
-
   return (
     <>
       <h1>Metrics {isLoading && <Loading />}</h1>
-      <code>
-        <pre>{response?.data}</pre>
-      </code>
+      {error ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <code>
+          <pre>{response?.data}</pre>
+        </code>
+      )}
     </>
   );
 };

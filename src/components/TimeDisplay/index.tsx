@@ -14,18 +14,23 @@ const TimeDisplay: React.FC = () => {
     return () => clearInterval(timer);
   }, [fetch]);
 
-  if (error) return <p>{error.response?.statusText}</p>;
-
   return (
     <>
       <h1>Current Time {isLoading && <Loading />}</h1>
-      <p>
-        Last Response: <code>{response?.data.epoch}</code>
-      </p>
-      <p>
-        Time since last response:{" "}
-        <TimeDifferenceDisplay startEpoch={response?.data.epoch} />
-      </p>
+      {error ? (
+        <p>Error: {error.message}</p>
+      ) : (
+        <>
+          {" "}
+          <p>
+            Last Response: <code>{response?.data.epoch}</code>
+          </p>
+          <p>
+            Time since last response:{" "}
+            <TimeDifferenceDisplay startEpoch={response?.data.epoch} />
+          </p>
+        </>
+      )}
     </>
   );
 };

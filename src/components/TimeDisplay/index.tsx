@@ -1,24 +1,9 @@
 import * as React from "react";
-import { useState, useEffect } from "react";
-import axios, { AxiosResponse, AxiosError } from "axios";
+import { useEffect } from "react";
+import useApi from "../useApi";
 
 const TimeDisplay: React.FC = () => {
-  const [isLoading, setLoading] = useState(true);
-  const [response, setResponse] = useState<AxiosResponse | undefined>(
-    undefined
-  );
-  const [error, setError] = useState<AxiosError | undefined>(undefined);
-
-  const fetch = () => {
-    setLoading(true);
-    axios
-      .get("http://localhost:8000/api/v1/time", {
-        headers: { Authorization: "mysecrettoken" },
-      })
-      .then(setResponse)
-      .catch(setError)
-      .finally(() => setLoading(false));
-  };
+  const { isLoading, response, error, fetch } = useApi("/api/v1/time");
 
   // Fetch on mount and start a timer to poll
   useEffect(() => {
